@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fatback Counter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background-color: #fff;
+    }
+    .container {
+      border: 3px solid #ccc;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: auto;
+      padding: 20px;
+    }
+    .header {
+      background-color: orange;
+      color: black;
+      font-weight: bold;
+      font-size: 1.5em;
+      padding: 10px;
+    }
+    .counter {
+      font-family: 'Courier New', monospace;
+      font-size: 4em;
+      color: red;
+      background: #000;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      margin: 20px 0;
+    }
+    .days-label {
+      font-size: 2em;
+      font-weight: bold;
+      display: block;
+    }
+    .footer {
+      font-size: 1.5em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">IT HAS BEEN</div>
+    <div class="counter" id="counter">0000</div>
+    <span class="days-label">DAYS</span>
+    <div class="footer">SINCE WE LOST FATBACK</div>
+  </div>
+
+  <script>
+    // Set the date you "lost fatback"
+    const lossDate = new Date('2025-06-14'); // Adjust this date
+    const today = new Date();
+    const diffTime = today - lossDate;
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    document.getElementById('counter').textContent = diffDays.toString().padStart(4, '0');
+  </script>
+</body>
+</html>
