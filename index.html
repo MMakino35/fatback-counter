@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Fatback Counter</title>
   <style>
     body {
@@ -14,7 +14,7 @@
     .container {
       border: 3px solid #ccc;
       border-radius: 10px;
-      max-width: 500px;
+      max-width: 600px;
       margin: auto;
       padding: 20px;
     }
@@ -27,18 +27,19 @@
     }
     .counter {
       font-family: 'Courier New', monospace;
-      font-size: 4em;
+      font-size: 2.5em;
       color: red;
       background: #000;
-      padding: 10px 20px;
+      padding: 15px 20px;
       border-radius: 8px;
       display: inline-block;
       margin: 20px 0;
     }
     .days-label {
-      font-size: 2em;
+      font-size: 1.2em;
       font-weight: bold;
       display: block;
+      margin-bottom: 10px;
     }
     .footer {
       font-size: 1.5em;
@@ -49,18 +50,30 @@
 <body>
   <div class="container">
     <div class="header">IT HAS BEEN</div>
-    <div class="counter" id="counter">0000</div>
-    <span class="days-label">DAYS</span>
-    <div class="footer">SINCE WE LOST FATBACK</div>
+    <div class="counter" id="counter">0000 DAYS 00:00:00</div>
+    <span class="days-label">SINCE WE LOST FATBACK</span>
+    <div class="footer"></div>
   </div>
 
   <script>
-    // Set the date you "lost fatback"
-    const lossDate = new Date('2025-06-14'); // Adjust this date
-    const today = new Date();
-    const diffTime = today - lossDate;
-    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-    document.getElementById('counter').textContent = diffDays.toString().padStart(4, '0');
+    // June 14, 2025 at 7:00 AM local time
+    const lossDate = new Date(2025, 5, 14, 7, 0, 0); // Month is 0-based (5 = June)
+
+    function updateCounter() {
+      const now = new Date();
+      const diffMs = now - lossDate;
+
+      const days = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diffMs / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diffMs / (1000 * 60)) % 60);
+      const seconds = Math.floor((diffMs / 1000) % 60);
+
+      const formatted = `${days.toString().padStart(4, '0')} DAYS ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+      document.getElementById('counter').textContent = formatted;
+    }
+
+    updateCounter();
+    setInterval(updateCounter, 1000);
   </script>
 </body>
 </html>
